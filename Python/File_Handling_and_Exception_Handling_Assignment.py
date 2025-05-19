@@ -8,7 +8,7 @@ def read_and_modify_file():
             content = file.read()
             print("File read successfully.")
 
-        # Modify content (e.g., convert to uppercase)
+        # Modify content ( convert to uppercase)
         modified_content = content.upper()
 
         # Create output filename
