@@ -1,0 +1,56 @@
+import 'dart:io';
+
+void main() {
+  String input = 'Hello Dart!';
+  print(manipulateString(input));
+
+  workWithCollections();
+  readWriteFiles();
+  showDateInfo();
+}
+
+// String Manipulation:
+String manipulateString(String input) {
+  String reversed = input.split('').reversed.join();
+  String upper = input.toUpperCase();
+  String lower = input.toLowerCase();
+  return 'Original: $input\nReversed: $reversed\nUpper: $upper\nLower: $lower';
+}
+
+void workWithCollections() {
+  List<String> names = ['Alice', 'Bob', 'Charlie'];
+  Set<String> uniqueNames = Set.from(names);
+  Map<String, int> nameLengths = {for (var name in names) name: name.length};
+
+  print('List: $names');
+  print('Set: $uniqueNames');
+  print('Map: $nameLengths');
+}
+
+void readWriteFiles() async {
+  try {
+    final inputFile = File('input.txt');
+    final outputFile = File('output.txt');
+
+    // Check if the input file exists; create with default content if not
+    if (!await inputFile.exists()) {
+      await inputFile.writeAsString('This is some default input text.');
+      print('Created "input.txt" with default content.');
+    }
+
+    String content = await inputFile.readAsString();
+    await outputFile.writeAsString('Modified content:\n$content');
+    print('File written successfully to "output.txt"!');
+  } catch (e) {
+    print('Error reading/writing file: $e');
+  }
+}
+
+
+void showDateInfo() {
+  DateTime now = DateTime.now();
+  DateTime past = DateTime(2000, 02, 22);
+  Duration diff = now.difference(past);
+
+  print('Now: $now');
+  print('Difference from Feb 22, 2000: ${diff.inDays} days');
